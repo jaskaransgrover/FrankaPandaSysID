@@ -59,11 +59,6 @@ class KinematicParamsEstimator(object):
 		self.I   		= self.I  + dt*Idot
 		self.thetacap   = self.thetacap + dt*thetacapdot
 
-
-
-
-
-
 		# K         = self.K											# low-pass filter gain
 		# lambda_f  = self.lambda_f									# forgetting factor 
 		# dt        = self.dt 			    						# sampling time
