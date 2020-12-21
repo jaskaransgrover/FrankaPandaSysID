@@ -57,6 +57,8 @@ class KinematicParamsEstimator(object):
 		self.C   		= self.C    + dt*Cdot
 		self.thetacap   = self.thetacap + dt*thetacapdot
 
+		
+
 		return self.thetacap
 
 

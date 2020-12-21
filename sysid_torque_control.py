@@ -42,7 +42,7 @@ if __name__ == "__main__":
     p.connect(p.GUI)
     urdfRootPath=pybullet_data.getDataPath()
     pandaUid = p.loadURDF(os.path.join(urdfRootPath, "franka_panda/panda.urdf"),useFixedBase=True)
-    tableUid = p.loadURDF(os.path.join(urdfRootPath, "table/table.urdf"),basePosition=[0.5,0,-0.65])
+    tableUid = p.loadURDF(os.path.join(urdfRootPath, "table/table.urdf"),basePosition=[0.0,0.0,0.0])
     p.setGravity(0,0,-9.81)
     p.resetDebugVisualizerCamera(cameraDistance=1.5, cameraYaw=0, cameraPitch=-40, cameraTargetPosition=[0.55,-0.35,0.2])
 

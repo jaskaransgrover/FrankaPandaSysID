@@ -44,14 +44,15 @@ class KinematicParamsEstimator(object):
 		Rfdot    = (1/K)*(R-self.Rf) 					
 		xfdot    = (1/K)*(x-self.xf)     				
 
-		Ddot     = (-lambda_f*self.D) + np.transpose(self.Rf)@self.Rf
-		Idot     = (-lambda_f*self.I) + np.transpose(self.Rf)@xfdot
-		P        = self.I - (self.D@self.thetacap)
+		Ddot     = (-lambda_f*self.D) + np.matmul(np.transpose(self.Rf),self.Rf)
+		Idot     = (-lambda_f*self.I) + np.matmul(np.transpose(self.Rf),xfdot)
+		P        = (self.I - np.matmul(self.D,self.thetacap))
+		P = P.astype(np.float)
 
 		if np.linalg.norm(P)<tol:
 			thetacapdot = np.zeros(np.shape(self.thetacap)) 
 		else:
-			thetacapdot = Gamma@(P/np.linalg.norm(P)) 				   # parameter update law, adaptive law
+			thetacapdot = np.matmul(Gamma,(P/np.linalg.norm(P))) 				   # parameter update law, adaptive law
 
 		self.Rf         = self.Rf + dt*Rfdot 					   
 		self.xf         = self.xf + dt*xfdot 					   
@@ -83,6 +84,7 @@ class KinematicParamsEstimator(object):
 		# self.Q   		= self.Q    + dt*Qdot
 		# self.C   		= self.C    + dt*Cdot
 		# self.thetacap   = self.thetacap + dt*thetacapdot
+		
 
 		return self.thetacap
 

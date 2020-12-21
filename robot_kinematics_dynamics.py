@@ -109,8 +109,8 @@ class RobotKinematicsDynamics(object):
 	def return_zdot(self,u,z):
 		qdot    	= z[2:4]
 		M,C         = self.inertia_and_coriolis(z)
-		vec         = (u - (C@qdot))
-		qddot       = (np.linalg.inv(M))@vec
+		vec         = (u - (np.matmul(C,qdot)))
+		qddot       = np.matmul(np.linalg.inv(M),vec)
 
 		zdot        = np.append(qdot,qddot)
 		return zdot
